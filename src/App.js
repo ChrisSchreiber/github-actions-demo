@@ -15,6 +15,7 @@ function App() {
             </a>
           </div>
         </p>
+        Automate All The tings!!!
       </header>
     </div>
   );
