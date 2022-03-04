@@ -1,5 +1,5 @@
-import logo from './Octocat.png';
-import './App.css';
+import logo from "./Octocat.png";
+import "./App.css";
 
 function App() {
   return (
