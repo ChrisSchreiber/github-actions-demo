@@ -18,7 +18,7 @@ jobs:
       - name: Google Setup
         uses: google-github-actions/auth@v0
         with:
-          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
 
       - name: Docker Build
         run: docker build -t gcr.io/$PROJECT_ID/demo-app .
@@ -34,17 +34,17 @@ jobs:
     needs:
       - build
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
 
     steps:
-    - name: Google Setup
-      uses: google-github-actions/auth@v0
-      with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+      - name: Google Setup
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
 
-    - name: Deploy to Cloud Run
-      uses: 'google-github-actions/deploy-cloudrun@v0'
-      with:
-        service: 'github-actions-demo'
-        image: 'gcr.io/${{ secrets.PROJECT_ID }}/demo-app'
+      - name: Deploy to Cloud Run
+        uses: "google-github-actions/deploy-cloudrun@v0"
+        with:
+          service: "github-actions-demo"
+          image: "gcr.io/${{ secrets.PROJECT_ID }}/demo-app"

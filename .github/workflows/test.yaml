@@ -7,7 +7,6 @@ on:
       - main
 
 jobs:
-
   tests:
     name: Unit Tests
     runs-on: ubuntu-latest
