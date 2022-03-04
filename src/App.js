@@ -8,16 +8,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         GitHub is awesome!!!
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <div>GitHub Repo: <a href="https://github.com/ChrisSchreiber/github-actions-demo">ChrisSchreiber / github-actions-demo</a></div>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          React
-        </a>
       </header>
     </div>
   );
