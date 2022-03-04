@@ -1,7 +1,6 @@
 name: Build & Deploy Application
 
 on:
-  push:
   pull_request:
     branches:
       - main
@@ -10,30 +9,27 @@ jobs:
   build:
     name: Build Application Container
     runs-on: ubuntu-latest
-
+    env:
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.PAT }}
 
       - name: Google Setup
-        id: 'auth'
-        uses: 'google-github-actions/auth@v0'
+        uses: google-github-actions/auth@v0
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
       - name: Docker Build
-        run: docker build -t gcr.io/${{ secrets.PROJECT_ID }}/demo-app .
+        run: docker build -t gcr.io/$PROJECT_ID/demo-app .
 
       - name: Docker Push
         run: |
           gcloud auth configure-docker -q
-          docker push gcr.io/${{ secrets.PROJECT_ID }}/demo-app
+          docker push gcr.io/$PROJECT_ID/demo-app
 
   deploy:
-    name: Deploy Application
+    name: Deploy Application to Cloud Run
     runs-on: ubuntu-latest
     needs:
       - build
@@ -42,12 +38,12 @@ jobs:
       id-token: 'write'
 
     steps:
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
+    - name: Google Setup
+      uses: google-github-actions/auth@v0
       with:
         credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-    - id: 'deploy'
+    - name: Deploy to Cloud Run
       uses: 'google-github-actions/deploy-cloudrun@v0'
       with:
         service: 'github-actions-demo'
