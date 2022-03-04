@@ -8,7 +8,12 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         GitHub is awesome!!!
         <p>
-          <div>GitHub Repo: <a href="https://github.com/ChrisSchreiber/github-actions-demo">ChrisSchreiber / github-actions-demo</a></div>
+          <div>
+            GitHub Repo:{" "}
+            <a href="https://github.com/ChrisSchreiber/github-actions-demo">
+              ChrisSchreiber / github-actions-demo
+            </a>
+          </div>
         </p>
       </header>
     </div>
